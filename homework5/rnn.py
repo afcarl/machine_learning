@@ -11,6 +11,7 @@ import time
 import os
 import datetime
 import cPickle as pickle
+from collections import OrderedDict
 
 theano.config.optimizer='fast_compile'
 #mode = theano.Mode(linker='cvm')
@@ -318,7 +319,7 @@ class MetaRNN(BaseEstimator):
             gparam = T.grad(cost, param)
             gparams.append(gparam)
 
-        updates = {}
+        updates = OrderedDict()
         for param, gparam in zip(self.rnn.params, gparams):
             weight_update = self.rnn.updates[param]
             upd = mom * weight_update - l_r * gparam
@@ -331,9 +332,9 @@ class MetaRNN(BaseEstimator):
         train_model = theano.function(inputs=[index, l_r, mom],
                                       outputs=cost,
                                       updates=updates,
-                                      givens={
-                                          self.x: train_set_x[index],
-                                          self.y: train_set_y[index]})
+                                      givens=OrderedDict([
+                                          (self.x, train_set_x[index]),
+                                          (self.y, train_set_y[index])]))
 
         ###############
         # TRAIN MODEL #
