@@ -1,0 +1,31 @@
+supervised/unsupervised
+	-supervised (have previous data labels)
+	-semisupervised - missing labels
+	-unsupervised (clustering/grouping)
+	-reinforcement (penalize for bad outcomes)
+	
+training/test/validation (train on train/compare on test/apply to validation)
+
+bias vs variance tradeoff.  more complex model has more variance.  More simple model has high bias (can't fit complex data).  High Varaince - risk of overfitnig.  Bias + variance = total error.
+
+regularization (of neural networks)
+
+baysian - 
+	
+
+PCA/dimensionality reduction
+
+Support Vector Machines -
+	Fit line that separates points.
+	Margin is the space between the line and the points
+	Support vectors are the points on the margin line
+	Soft margin - relax constraint on requirement that points be outside margin.  Not linearally separable then at least one of the "slack variables" is greater than 1.
+	Soft margin - helps with linear separaion.
+
+
+(Recurrant) Neural Network -
+	
+Naive Bayes -
+	Train naive bayes by hand
+	
+Ridge/Lasso - which prior leads to which.  How do regularization constants (w) affect crap (affect w?)?  Regularization constant shrinks?

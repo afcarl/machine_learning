@@ -1,0 +1,7 @@
+model.rnn.params
+s = 0
+for p in model.rnn.params:
+    print(p, p.get_value().size)
+    s += p.get_value().size
+    
+print(s)
