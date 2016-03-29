@@ -29,3 +29,12 @@ Naive Bayes -
 	Train naive bayes by hand
 	
 Ridge/Lasso - which prior leads to which.  How do regularization constants (w) affect crap (affect w?)?  Regularization constant shrinks?
+
+Ridge - gaussian
+Lasso - Lagronge?sdfkjsdflkas
+
+) p(wj)∼e−λ|wj|/σ
+
+P(X|Y,Z,A) = P(Y|X)P(Z|X)P(!A|X)P(X)
+
+A,Z,Y -> X
