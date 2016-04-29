@@ -1,4 +1,3 @@
-from __future__ import print_function, division
 import numpy as np
 from random import seed, shuffle
 import loss_funcs as lf # our implementation of loss funcs
@@ -239,10 +238,10 @@ def print_classifier_fairness_stats(acc_arr, correlation_dict_arr, cov_dict_arr,
     prot_pos = correlation_dict[s_attr_name][0][1]
     p_rule = (prot_pos / non_prot_pos) * 100.0
     
-    print("Accuracy: %0.2f" % (np.mean(acc_arr)))
-    print("Protected/non-protected in +ve class: %0.0f%% / %0.0f%%" % (prot_pos, non_prot_pos))
-    print("P-rule achieved: %0.0f%%" % (p_rule))
-    print("Covariance between sensitive feature and decision from distance boundary : %0.3f" % (np.mean([v[s_attr_name] for v in cov_dict_arr])))
+    print ("Accuracy: %0.2f" % (np.mean(acc_arr)))
+    print ("Protected/non-protected in +ve class: %0.0f%% / %0.0f%%" % (prot_pos, non_prot_pos))
+    print ("P-rule achieved: %0.0f%%" % (p_rule))
+    print ("Covariance between sensitive feature and decision from distance boundary : %0.3f" % (np.mean([v[s_attr_name] for v in cov_dict_arr])))
     print()
     return p_rule
 
@@ -258,12 +257,12 @@ def compute_p_rule(x_control, class_labels):
     frac_prot_pos = float(prot_pos) / float(prot_all)
     p_rule = (frac_prot_pos / frac_non_prot_pos) * 100.0
     print()
-    print("Total data points: %d" % (len(x_control)))
-    print("# non-protected examples: %d" % (non_prot_all))
-    print("# protected examples: %d" % (prot_all))
-    print("Non-protected in positive class: %d (%0.0f%%)" % (non_prot_pos, non_prot_pos * 100.0 / non_prot_all))
-    print("Protected in positive class: %d (%0.0f%%)" % (prot_pos, prot_pos * 100.0 / prot_all))
-    print("P-rule is: %0.0f%%" % ( p_rule ))
+    print ("Total data points: %d" % (len(x_control)))
+    print ("# non-protected examples: %d" % (non_prot_all))
+    print ("# protected examples: %d" % (prot_all))
+    print ("Non-protected in positive class: %d (%0.0f%%)" % (non_prot_pos, non_prot_pos * 100.0 / non_prot_all))
+    print ("Protected in positive class: %d (%0.0f%%)" % (prot_pos, prot_pos * 100.0 / prot_all))
+    print ("P-rule is: %0.0f%%" % ( p_rule ))
     return p_rule
 
 
@@ -290,12 +289,6 @@ def get_one_hot_encoding(in_arr):
         output: m (ndarray): one-hot encoded matrix
                 d (dict): also returns a dictionary original_val -> column in encoded matrix
     """
-
-    for k in in_arr:
-        if str(type(k)) != "<type 'numpy.float64'>" and type(k) != int and type(k) != np.int64:
-            print(str(type(k)))
-            print("************* ERROR: Input arr does not have integer types")
-            return None
         
     in_arr = np.array(in_arr, dtype=int)
     assert(len(in_arr.shape)==1) # no column, means it was a 1-D arr
@@ -383,8 +376,8 @@ def test_sensitive_attr_constraint_cov(model, x_arr, y_arr_dist_boundary, x_cont
     ans = thresh - abs(cov) # will be <0 if the covariance is greater than thresh -- that is, the condition is not satisfied
     # ans = thresh - cov # will be <0 if the covariance is greater than thresh -- that is, the condition is not satisfied
     if verbose is True:
-        print("Covariance is", cov)
-        print("Diff is:", ans)
+        print ("Covariance is", cov)
+        print ("Diff is:", ans)
         print()
     return ans
 
@@ -492,12 +485,10 @@ def get_constraint_list_cov(x_train, y_train, x_control_train, sensitive_attrs, 
 
     constraints = []
 
-
     for attr in sensitive_attrs:
 
-
         attr_arr = x_control_train[attr]
-        attr_arr_transformed, index_dict = get_one_hot_encoding(attr_arr)
+        attr_arr_transformed, index_dict = get_one_hot_encoding(attr_arr.astype(int))
                 
         if index_dict is None: # binary attribute
             thresh = sensitive_attrs_to_cov_thresh[attr]
